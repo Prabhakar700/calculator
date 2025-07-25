@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculator</title>
+   <style>
+   
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      user-select: none;
+    }
+
+    .container {
+      background: #1e1e2f;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      width: 320px;
+    }
+
+    #input {
+      width: 100%;
+      height: 60px;
+      font-size: 2rem;
+      text-align: right;
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 20px;
+      background-color: #2a2a3f;
+      color: #fff;
+      letter-spacing: 1.5px;
+      box-shadow: inset 0 0 5px #000;
+    }
+
+    
+    .box1, .box2, .box3, .box4, .box5 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+  
+    button {
+      padding: 15px 0;
+      font-size: 1.3rem;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #3b3b5a, #2f2f47);
+      color: #e0e0e0;
+      cursor: pointer;
+      box-shadow:  5px 5px 10px #23233e,
+                   -5px -5px 10px #474768;
+      transition: 
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.1s ease;
+      user-select: none;
+    }
+
+    
+    button:hover {
+      background: linear-gradient(145deg, #505074, #3f3f5e);
+      box-shadow:  7px 7px 14px #1d1d35,
+                   -7px -7px 14px #626289;
+      color: #fff;
+    }
+
+  
+    button:active {
+      transform: scale(0.95);
+      box-shadow: inset 2px 2px 5px #1c1c33,
+                  inset -2px -2px 5px #575776;
+      background: linear-gradient(145deg, #2a2a3f, #1f1f2b);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <input type="text" id="input" readonly>
+    
+    <div class="box1">
+      <button onclick="Allclear()">AC</button>
+      <button onclick="del()">DEL</button>
+      <button onclick="opt('%')">%</button>
+      <button onclick="opt('/')">/</button>
+    </div>
+
+    <div class="box2">
+      <button onclick="btn(7)">7</button>
+      <button onclick="btn(8)">8</button>
+      <button onclick="btn(9)">9</button>
+      <button onclick="opt('*')">*</button>
+    </div>
+
+    <div class="box3">
+      <button onclick="btn(4)">4</button>
+      <button onclick="btn(5)">5</button>
+      <button onclick="btn(6)">6</button>
+      <button onclick="opt('-')">-</button>
+    </div>
+
+    <div class="box4">
+      <button onclick="btn(1)">1</button>
+      <button onclick="btn(2)">2</button>
+      <button onclick="btn(3)">3</button>
+      <button onclick="opt('+')">+</button>
+    </div>
+
+    <div class="box5">
+      <button onclick="btn(0)">0</button>
+      <button onclick="btn('00')">00</button>
+      <button onclick="opt('.')">.</button>
+      <button onclick="equal()">=</button>
+    </div>
+  </div>
+
+  <script>
+    let b = document.getElementById("input");
+    let count = 0;
+
+    function btn(num) {
+      count = 0;
+      b.value += num;
+    }
+
+    function equal() {
+      try {
+        b.value = eval(b.value);
+      } catch {
+        b.value = "Error";
+      }
+    }
+
+    function Allclear() {
+      b.value = "";
+    }
+
+    function del() {
+      b.value = b.value.slice(0, -1);
+    }
+
+    function opt(op) {
+      if (count == 0 && b.value !== "") {
+        count++;
+        b.value += op;
+      }
+    }
+  </script>
+</body>
+</html>
